@@ -17,9 +17,12 @@ const config: Config = {
         tertiary: 'var(--tertiary)',
         text: 'var(--text)',
         contrast: 'var(--contrast)',
+        white: 'var(--white)',
+        bg: 'var(--bg)',
+        'bg-contrast': 'var(--bg-contrast)',
       },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
 export default config;
