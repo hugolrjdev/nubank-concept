@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mantine/hooks": "^7.3.2",
     "@tabler/icons-react": "^2.44.0",
     "clsx": "^2.0.0",
     "date-fns": "^3.0.6",
