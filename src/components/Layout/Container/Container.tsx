@@ -11,10 +11,10 @@ export function Container({ children }: ContainerProps) {
   const [opened, setOpened] = useState(false);
 
   return (
-    <>
+    <div className="flex flex-col md:flex-row relative">
       <Navbar opened={opened} setOpened={setOpened} />
       <Header setOpened={setOpened} />
-      {children}
-    </>
+      <main className="max-w-[1600px] md:pl-[300px] w-full mx-auto">{children}</main>
+    </div>
   );
 }

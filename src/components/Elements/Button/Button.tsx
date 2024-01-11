@@ -1,37 +1,61 @@
-import {ElementType} from '@/types'
-import { ReactElement } from "react";
+import { cn } from '@/lib/utils';
+import { ElementType } from '@/types';
+import { ReactElement } from 'react';
 
 export type ButtonProps = {
-    text: string;
-    variant?: 'default' | 'subtitle';
-    leftSection?: ReactElement;
-    rightSection?: ReactElement;
-} & ElementType;
+  variant?: 'default' | 'subtle';
+  leftSection?: ReactElement;
+  rightSection?: ReactElement;
+  tooltip?: string;
+} & ElementType<HTMLButtonElement>;
 
 export function Button({
-    text,
-    variant = 'default',
-    leftSection,
-    rightSection,
-    className=''
+  variant = 'default',
+  leftSection,
+  rightSection,
+  className = '',
+  wrapperClassName,
+  children,
+  tooltip,
 }: ButtonProps) {
-        let twClassName = '';
+  let defaultStyle = 'btn btn-sm py-3 px-10 h-fit min-h-11 rounded-full shadow-none border-none';
+  const content = (
+    <>
+      {leftSection && <div className="mr-2">{leftSection}</div>}
+      {children}
+      {rightSection && <div className="mr-2">{rightSection}</div>}
+    </>
+  );
 
-        switch(variant) {
-            case 'default':
-                twClassName = `flex flex-row items-center justify-center bg-primary hover:bg-tertiary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full text-white text-md hover:text-white font-normal ${className}`;
-                break;
-            case 'subtitle':
-                twClassName = `flex flex-row items-center justify-center bg-transparent text-primary hover:bg-primary active:bg-tertiary py-2 px-4 min-w-[150px] rounded-full text-primary text-md hover:text-white font-bold ${className}`;
-                break;
-        }
-
-
+  if (variant === 'default') {
     return (
-        <button className={twClassName}>
-            {leftSection && <div className="mr-2">{leftSection}</div>}
-            {text}
-            {rightSection && <div className="ml-2">{rightSection}</div>}
+      <button
+        className={cn([
+          defaultStyle,
+          'text-white bg-primary hover:bg-tertiary',
+          className,
+          tooltip && 'tooltip',
+        ])}
+        data-tip={tooltip}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  if (variant === 'subtle') {
+    return (
+      <div className={cn([tooltip && 'tooltip', wrapperClassName])} data-tip={tooltip}>
+        <button
+          className={cn([
+            defaultStyle,
+            'text-primary bg-transparent hover:bg-primary hover:text-white',
+            className,
+          ])}
+        >
+          {content}
         </button>
-    )
+      </div>
+    );
+  }
 }
