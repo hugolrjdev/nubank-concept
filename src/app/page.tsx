@@ -53,12 +53,15 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="flex flex-row mt-20">
-          <h2 className="text-2xl font-bold mb-4">Transações recentes</h2>
+        <div className="block xl:hidden">
+          <HomeInfoSection search={search} setSearch={setSearch} />
         </div>
+        <div>Transações</div>
       </div>
-      <div className="bg-constrast flex-1 h-screen py-6 px-20 w-fit">
-        <HomeInfoSection />
+      <div className="bg-contrast fixed w-[20%] xl:w-[calc(50%-100px)] right-0 flex-1 h-screen py-10 px-20 hidden xl:block">
+        <div className="max-w-[500px]">
+          <HomeInfoSection search={search} setSearch={setSearch} />
+        </div>
       </div>
     </div>
   );

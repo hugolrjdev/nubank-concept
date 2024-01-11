@@ -16,10 +16,12 @@ export function Input({
   value,
   setValue,
   leftSection,
+  placeholder,
 }: InputProps) {
   return (
     <div className={cn(['relative text-primary font-normal', wrapperClassName])}>
       <input
+        placeholder={placeholder}
         type={type}
         className={cn(
           [

@@ -1,7 +1,11 @@
 'use client';
 
-import { TextInput } from '@/components/Elements';
+import { Select, Tabs, TextInput } from '@/components/Elements';
+import { ElementType } from '@/types';
+import { categories } from '@/values/data';
+import { IconSearch } from '@tabler/icons-react';
 import { useState } from 'react';
+import { ExpensesTab, ReleasesTab, TaxesTab } from '..';
 
 const tabData = [
   {
@@ -20,26 +24,54 @@ const tabData = [
 
 const selectData = [
   {
-    text: 'Dia',
+    name: 'Dia',
     value: 'day',
   },
   {
-    text: 'Mês',
+    name: 'Mês',
     value: 'month',
   },
   {
-    text: 'Ano',
+    name: 'Ano',
     value: 'year',
   },
 ];
 
-export function HomeInfoSection() {
+type HomeInfoSectionProps = {
+  search: string;
+  setSearch: (value: string) => void;
+} & ElementType;
+
+export function HomeInfoSection({ search, setSearch }: HomeInfoSectionProps) {
   const [activeTab, setActiveTab] = useState(tabData[0].value);
   const [activeSelectData, setActiveSelectData] = useState(selectData[0]);
 
   return (
     <>
-      <TextInput />
+      <TextInput
+        value={search}
+        setValue={setSearch}
+        placeholder="Pode perguntar"
+        leftSection={<IconSearch size={20} className="absolute right-4 top-0 translate-y-3" />}
+      />
+      <div className="flex flex-row flex-wrap justify-between gap-5 mt-10">
+        <Tabs items={tabData} setActive={setActiveTab} active={activeTab} />
+        <Select
+          active={activeSelectData}
+          setActive={setActiveSelectData}
+          items={selectData}
+          className="w-[100px]"
+        />
+      </div>
+      <div className="w-full">
+        {activeTab === 'expenses' ? (
+          <ExpensesTab data={categories} />
+        ) : activeTab === 'releases' ? (
+          <ReleasesTab />
+        ) : activeTab === 'taxes' ? (
+          <TaxesTab />
+        ) : null}
+      </div>
     </>
   );
 }

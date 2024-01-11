@@ -13,7 +13,7 @@ export function CreditCard({ name, brand, className }: CreditCardsProps) {
   return (
     <div
       className={cn([
-        `bg-primary text-white p-4 rounded-lg relative min-w-[320px] h-[180px] z-0`,
+        `bg-primary text-white p-4 rounded-lg relative min-w-[300px] h-[180px] z-0`,
         className,
       ])}
     >
