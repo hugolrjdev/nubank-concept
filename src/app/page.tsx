@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-row w-full xl:max-w-[calc(50%-60px)]">
-      <div className="flex flex-col flex-1 p-6 pt-10">
+      <div className="flex flex-col flex-1 p-6 pt-10 h-full">
         <div className="flex flex-col items-start justify-start mb-20">
           <h1 className="text-3xl font-bold">Olá Mateus!</h1>
           <span className="max-w-[320px]">
@@ -53,10 +53,10 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="block xl:hidden">
+        <div className="block mt-10 xl:hidden ">
           <HomeInfoSection search={search} setSearch={setSearch} />
         </div>
-        <div>Transações</div>
+        <div className="mt-10"></div>
       </div>
       <div className="bg-contrast fixed w-[20%] xl:w-[calc(50%-100px)] right-0 flex-1 h-screen py-10 px-20 hidden xl:block">
         <div className="max-w-[500px]">

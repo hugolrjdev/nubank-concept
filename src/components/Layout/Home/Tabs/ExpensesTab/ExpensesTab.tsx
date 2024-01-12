@@ -1,3 +1,4 @@
+import { CategoriesProgress } from '@/components/Elements';
 import { Category } from '@/types';
 import { transactions } from '@/values/data';
 import Image from 'next/image';
@@ -17,7 +18,7 @@ export function ExpensesTab({ data }: ExpensesTabProps) {
       )}
       <div className="w-full">
         <div className="flex flex-row justify-between max-w-[400px] w-full mx-auto mt-8">
-          <div>Categorias</div>
+          <CategoriesProgress />
         </div>
       </div>
     </div>
