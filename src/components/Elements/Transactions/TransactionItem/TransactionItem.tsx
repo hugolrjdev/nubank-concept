@@ -20,7 +20,7 @@ export function TransactionItem({ data }: TransactionItemProps) {
       <div className="pl-[60px]">
         <span className="font-medium text-sm">{category?.name}</span>
         <h3 className="font-medium my-0">{data.name || <i>Sem nome</i>}</h3>
-        <span>{format(data.date, 'dd/MM/yyyy')}</span>
+        <span className="text-xs">{format(data.date, 'dd/MM/yyyy')}</span>
       </div>
       <span className="font-medium">R$ {data.value}</span>
     </div>

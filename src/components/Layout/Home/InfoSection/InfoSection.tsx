@@ -43,7 +43,7 @@ type HomeInfoSectionProps = {
 } & ElementType;
 
 export function HomeInfoSection({ search, setSearch }: HomeInfoSectionProps) {
-  const [activeTab, setActiveTab] = useState(tabData[0].value);
+  const [activeTab, setActiveTab] = useState(tabData[1].value);
   const [activeSelectData, setActiveSelectData] = useState(selectData[0]);
 
   return (

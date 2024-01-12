@@ -86,4 +86,28 @@ export const transactions: Transaction[] = [
     categoryId: 3,
     type: 'pix',
   },
+  {
+    id: uuid(),
+    name: 'Mercado',
+    date: new Date(),
+    value: 230,
+    categoryId: 3,
+    type: 'pix',
+  },
+  {
+    id: uuid(),
+    name: 'Mercado',
+    date: new Date(),
+    value: 230,
+    categoryId: 3,
+    type: 'pix',
+  },
+  {
+    id: uuid(),
+    name: 'Mercado',
+    date: new Date(),
+    value: 230,
+    categoryId: 3,
+    type: 'pix',
+  },
 ];

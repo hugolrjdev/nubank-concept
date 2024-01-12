@@ -1,6 +1,7 @@
 'use client';
-import { Button, CreditCard } from '@/components/Elements';
+import { Button, CreditCard, TransactionList } from '@/components/Elements';
 import { HomeInfoSection } from '@/components/Layout';
+import { transactions } from '@/values/data';
 import { IconArrowRight, IconInfoCircle } from '@tabler/icons-react';
 import { useState } from 'react';
 
@@ -56,7 +57,9 @@ export default function Home() {
         <div className="block mt-10 xl:hidden ">
           <HomeInfoSection search={search} setSearch={setSearch} />
         </div>
-        <div className="mt-10"></div>
+        <div className="mt-10">
+          <TransactionList title="Transações recentes" items={transactions} />
+        </div>
       </div>
       <div className="bg-contrast fixed w-[20%] xl:w-[calc(50%-100px)] right-0 flex-1 h-screen py-10 px-20 hidden xl:block">
         <div className="max-w-[500px]">
