@@ -1,42 +1,43 @@
-import { CategoriesProgress, TransactionList } from "@/components/Elements";
-import { transactions } from "@/values/data";
-import { isToday, isYesterday } from "date-fns";
+'use client';
 
-
-
+import { AddTransaction } from '@/components/Actions';
+import { CategoriesProgress, TransactionList } from '@/components/Elements';
+import { transactions } from '@/values/data';
+import { isToday, isYesterday } from 'date-fns';
+import { useState } from 'react';
 
 export default function Transactions() {
+  const [date, setDate] = useState(new Date());
+  const totalExpenses = transactions.reduce((acc, transaction) => transaction.value + acc, 0);
 
-  const totalExpenses = transactions.reduce((acc, transactions)=> transactions.value + acc, 0);
+  const today = transactions.filter((transaction) => isToday(transaction.date));
+  const yesterday = transactions.filter((transaction) => isYesterday(transaction.date));
+  const previous = transactions.filter(
+    (transaction) => !isYesterday(transaction.date) && !isToday(transaction.date)
+  );
 
-
-  const today = transactions.filter((transaction)=> isToday(transaction.date));
-  const yesterday = transactions.filter((transaction)=> isYesterday(transaction.date));
-  const previous = transactions.filter((transaction)=> !isYesterday(transaction.date) && !isToday(transaction.date));
-
-  return <div className="flex flex-col p-6 pt-10">
-    <div className="flex flex-row justify-between">
-      <h1 className="font-bold text-3xl mb-5">
-        {/*Botão adicionar transação*/}
-      </h1>
-    </div>
-
-    <div className="flex flex-row flex-wrap gap-y-10 .gap-x-[300px] justify-center w-full p-12 bg-contrast rounded-xl mb-10">
-     <div className="flex flex-col justify-center text-primary">
-     <div>
-        <span className="font-medium">
-          total de gastos:&nbsp;
-        </span>
-         {totalExpenses.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+  return (
+    <div className="flex flex-col p-6 pt-10">
+      <div className="flex flex-row justify-between">
+        <h1 className="font-bold text-3xl mb-5">Transações</h1>
+        <AddTransaction />
       </div>
-     </div>
-
-      <CategoriesProgress className="justify-center max-w-[400px] flex-wrap gap-x-20 gap-y-10" />
+      <div className="flex flex-row flex-wrap gap-x-[300px] gap-y-10 justify-center w-full p-12 bg-contrast rounded-xl mb-10">
+        <div className="flex flex-col justify-center text-primary">
+          <span className="font-medium">
+            Total de gastos:{' '}
+            <b>{totalExpenses.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
+          </span>
+        </div>
+        <CategoriesProgress className="justify-center max-w-[400px] flex-wrap gap-x-20 gap-y-10" />
+      </div>
+      <div className="flex flex-col max-w-[600px] w-full mx-auto gap-10">
+        {today.length > 0 && <TransactionList title="Hoje" items={today} />}
+        {yesterday.length > 0 && <TransactionList title="Ontem" items={yesterday} />}
+        {previous.length > 0 && (
+          <TransactionList title={(today || yesterday) && 'Anterior'} items={previous} />
+        )}
+      </div>
     </div>
-    <div className="flex flex-col w-full max-w-[600px] max-auto gap-10">
-      {today.length > 0 && <TransactionList items={today}/>}
-      {yesterday.length > 0 && <TransactionList title="Ontem" items={yesterday}/>}
-      {previous.length > 0 && <TransactionList title={(today && yesterday && "Anteriores")} items={previous}/>}
-    </div>
-  </div>
+  );
 }
